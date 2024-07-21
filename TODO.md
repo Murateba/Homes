@@ -5,3 +5,4 @@
 - [ ] Fix details design
 - [ ] Fix application form
 - [ ] Re-design
+- [ ] Save applications in the databse

@@ -1,5 +1,6 @@
 ### 🎯TODO
 - [ ] Add localization
+- [ ] Implement Firebase Storage
 - [ ] Remove unnecessary imports
 - [ ] Fix home page
 - [ ] Fix details design

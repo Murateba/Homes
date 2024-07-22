@@ -1,18 +1,25 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, NgModule } from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ActivatedRoute} from '@angular/router';
 import {HousingService} from '../housing.service';
 import { HousingLocation } from '../housinglocation';
 import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
+import { BooleanToYesNoPipe } from '../booleanToYesNo.pipe';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faWifi } from '@fortawesome/free-solid-svg-icons';
+import { faSocks } from '@fortawesome/free-solid-svg-icons';
+import { faBed } from '@fortawesome/free-solid-svg-icons';
+
+
 @Component({
   selector: 'app-details',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FontAwesomeModule, BooleanToYesNoPipe],
   template: `
   <article>
     <img
       class="listing-photo"
-      [src]="housingLocation?.photo"
+      [src]="'assets/img/' + housingLocation?.id + '.jpg'"
       alt="Exterior photo of {{ housingLocation?.name }}"
       crossorigin
     />
@@ -23,9 +30,9 @@ import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
     <section class="listing-features">
       <h2 class="section-heading">About this housing location</h2>
       <ul>
-        <li>Units available: {{ housingLocation?.availableUnits }}</li>
-        <li>Does this location have wifi: {{ housingLocation?.wifi }}</li>
-        <li>Does this location have laundry: {{ housingLocation?.laundry }}</li>
+        <li><fa-icon [icon]="faBed" id="primary-color"></fa-icon><strong id="primary-color"> Units</strong> {{  housingLocation?.units }}</li>
+        <li><fa-icon [icon]="faWifi" id="primary-color"></fa-icon><strong id="primary-color"> Wi-Fi</strong> {{ housingLocation?.wifi | booleanToYesNo }}</li>
+        <li><fa-icon [icon]="faSocks" id="primary-color"></fa-icon><strong id="primary-color"> Laundry</strong> {{ housingLocation?.laundry | booleanToYesNo }}</li>
       </ul>
     </section>
     <section class="listing-apply">
@@ -45,6 +52,11 @@ import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
   styleUrl: './details.component.css'
 })
 export class DetailsComponent {
+
+faWifi = faWifi
+faSocks = faSocks
+faBed = faBed
+
   route: ActivatedRoute = inject(ActivatedRoute);
   housingService = inject(HousingService);
   housingLocation: HousingLocation | undefined;

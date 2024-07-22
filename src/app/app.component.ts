@@ -1,10 +1,12 @@
-import {Component} from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {HomeComponent} from './home/home.component';
 import { RouterLink, RouterOutlet } from '@angular/router';
+import { Firestore } from '@angular/fire/firestore';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [HomeComponent, RouterLink, RouterOutlet],
+  imports: [HomeComponent, RouterLink, RouterOutlet, FontAwesomeModule],
   template: `
     <main>
       <a [routerLink]="['/']">
@@ -21,5 +23,5 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'default';
-  
+  firestore: Firestore = inject(Firestore);
 }
